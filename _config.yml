@@ -25,9 +25,9 @@ description: >- # this means to ignore newlines until "baseurl:"
   Open Source Software that is managed within a Git repository. 
 
   Quency provides LowEndInsight as a service.
-domain: quency-ai.github.io
-baseurl: "/.github/" # the subpath of your site, e.g. /blog
-url: "https://quency-ai.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+domain: www.lowendinsight.dev
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://www.lowendinsight.dev" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: quency-ai
 
 
