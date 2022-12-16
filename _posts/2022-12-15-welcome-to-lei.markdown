@@ -8,7 +8,7 @@ categories: lei update
 ## Everything Needs an API
 
 This project has been in various states over the past 10 years or so - read more
-[about](/.github/about) the history.  But I'd always felt like a simple, publicly
+[about](/about) the history.  But I'd always felt like a simple, publicly
 available API would be part of the interface.
 
 Recently found out about [RapidApi](https://rapidapi.com/hub) and as I'd been
