@@ -29,7 +29,7 @@ domain: www.lowendinsight.dev
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.lowendinsight.dev" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: quency-ai
-
+issues_repo: quency-ai/.github
 
 # Build settings
 theme: minima
