@@ -1,9 +1,8 @@
 ---
 layout: post
 title:  "Yak-Shaving in Paradise, The Vulnerabilty versus Prevention Chase."
-date:   2022-12-15 17:46:41 -0500
+date:   2022-12-23 10:46:41 -0500
 categories: lei
-comments_id: 1
 ---
 
 ## "Here Be Dragons"
