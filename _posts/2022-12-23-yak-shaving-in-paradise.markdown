@@ -9,6 +9,8 @@ categories: lei
 
 Caveat: this is not a formal essay, instead is a stream of thought inspired by general holiday-ish boredom.  Apologies in advanced if you've found yourself wanting your time back after skimming.  And so it is just my opinion, based on many years of experience in specific software engineering realms and at various organizations.  I've also put down some basic research for sponsors who wish to remain unknown. This is a long read, and I promise no guarentee of anything more than maybe a head-nod or two, and some free entertainment if you're willing.
 
+No editor was wasted in the production of this, apologies for the write-to-post lack of quality.
+
 ### TLDR;
 
 * Known vulnerabilities are a lagging indicator of security, never-ending tail-chasing.  Just because you think you have none doesn't mean you are secure (at all)
@@ -268,5 +270,5 @@ A Jupyter Notebook plot of contributors example:
 
 ## Comments?
 
-Dunno, not really sure.  Probably going to syndicate this to Medium.  But for posterity, if you don't want to leave a comment or kick off a discussion feel free to do so [in this GitHub issue](https://github.com/quency-ai/.github/issues/1).  I know some people have wired up GH issues to the Jekyll site.  Mo yak-shaving...for another day.
+Dunno, not really sure.  Probably going to syndicate this to Medium.  But for posterity, if you do want to leave a comment or kick off a discussion feel free to do so [in this GitHub issue](https://github.com/quency-ai/.github/issues/1).  I know some people have wired up GH issues to the Jekyll site.  Mo yak-shaving...for another day.
 
