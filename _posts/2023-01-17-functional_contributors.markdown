@@ -113,7 +113,7 @@ table = ff.create_table(df)
 table.update_layout(width=1024)
 table.show()
 ```
-![table](../assets/images/lei-novu-table.png)
+![table](/assets/images/lei-novu-table.png)
 
 ```python
 import plotly.express as px
@@ -121,7 +121,7 @@ fig = px.bar(x=df['name'].to_list(), y=df['contributions'].to_numpy(), title=rep
 fig.update_layout(width=1024)
 fig.show()
 ```
-![plotly.express](../assets/images/lei-novu-plot.png)
+![plotly.express](/assets/images/lei-novu-plot.png)
 
 At first glance this doesn't look like a terrible distribution.  There are contributions from David Soderberg with different email address, but it doesn't affect the perspective much. From a contributor view it looks "low" risk.  
 
@@ -129,11 +129,11 @@ At first glance this doesn't look like a terrible distribution.  There are contr
 
 In contrast let's take a look at [ExpressJS/express](https://github.com/expressjs/express) a popular javascript web-app framework:
 
-![lei-express-table](../assets/images/lei-express-table.png)
+![lei-express-table](/assets/images/lei-express-table.png)
 
 It becomes clear that this distribution looks considerably different - with the majority of contributions coming early in the project's history.  And the majority of contributions came from someone who hasn't contributed in over 10 years.  This presents a significantly different risk profile.
 
-![lei-express-plot](../assets/images/lei-express-plot.png)
+![lei-express-plot](/assets/images/lei-express-plot.png)
 
 While this insight doesn't point at security vulnerabilities it does paint a picture that _could_ cause concern over the ability to get updates made and new releases propogated to the appropriate package management ecosystem.
 
