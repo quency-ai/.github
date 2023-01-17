@@ -1,0 +1,148 @@
+---
+layout: post
+title:  "Functional Contributors"
+date:   2022-01-17 10:46:41 -0500
+categories: lei
+---
+
+## TLDR
+
+`All software builds on software.  Sounds obscure and abstract...well, because it is.`
+
+This is a winded essay that looks into the problems associated with current developer-security priorities.
+
+Shifting left of security, in order to close the accountability gap, and look towards prevention in addition to vulnerability scanning - requires new levels of due diligence in the developer decision making process.  There tools available to assist in that due diligence, simplifying the data discovery and analysis required to gain quick insights. 
+ 
+## The World has a Problem
+
+We are chasing the proverbial tail.  Our global cybersecurity posture is based on two huge fallacies - 1) defense is based on economically manipulated black-market attack vectors, propogated within and without nation-state actors, who are equally manipulated; and 2) the entire premise operates on "known" vulnerabilities - prevention and defense are hyper focused on the ability to scan for "known" holes and offense is the new luke-cold warfare.
+
+[This is How they Tell Me the World Ends](https://thisishowtheytellmetheworldends.com/) is an incredible look into the brief history of how we got here - showing how it is near impossible to trace trace to knowledge, who is who in the zoo.
+
+[Rohit Sethi at Security Compass and his essay on the need to focus on leading indicators](https://www.securitycompass.com/in-the-news/guest-essay-the-case-for-network-defenders-to-focus-on-leading-not-lagging-indicators/) highlight the reality that we're not really protecting the fort, nor preventing the holes, but are only looking for vulnerabilities as they become known by continually scanning against what has already been built.
+
+[Mark Curphey sees a crash coming](https://blog.crashoverride.com/a-security-tools-crash-is-coming) in the secuity tools space. While consolidation is a natural contraction in technology's rapid evolutionary environments Mark points out that "budget freezes" induced by global economic changes will affect how organizations spend.  And as the reality of this awkward security posture becomes clearer - many of those companies will be exposed, as simply not effective.  More to the point, [Mark also highlights the obvious](https://blog.crashoverride.com/why-supply-chain-security-is-so-much-more-than-open-source-code-and-cves) that even with SBOM/BOM technology in place and clean bills of health, organizational dependency on "services" (e.g., IaaS, PaaS, and SaaS level software) plus the lagging indicator problem of "known" vulnerabilities creates a massive false sense of security.
+
+## Software Engineering has a Problem
+All software builds on software.  Sounds obscure and abstract...well, because it is.  I'll go ahead and take the position that Open Source software (OSS) is generally and ubiquitously foundational - at the OS, application, language, library, framework levels.
+
+While there are supporting organizations and foundations (e.g., Apache, Linux, and Cloud-Native Compute, etc), that create ecosystems for commercialization, the closer you get to development and software engineering - the greater the dependencies become of open source.  There are very few software engineers out there developing solutions from scratch.  And even if they were, they're likely doing it with open source language and tool depenendencies.
+
+[I am not a supplier](https://www.softwaremaxims.com/blog/not-a-supplier), a post by [Thomas Depierre](https://github.com/DianaOlympos), is a massive right-hook to our understanding of the complexity that exists between open-source software contributors and maintainers and downstream consumers and users.
+
+Our software-supply chain structure is strained, and new demands for formality in the relationship between producers and consumers is exacerbating the load on both ends.   Nevermind the strange assumptions that SBOMs are a direct security construct, but the loose contract between consumers of OSS leads to more assumptions about the supply-chain.  Specifically, the notion that an upstream project will act as a maintenance function in a time of need (bug, feature or security issue).  Put plainly,
+
+`what is the probability the project will resolve and release a fix when needed in a timely fashion?`
+
+that you as a consuming can rely on in your own software supply-chain stream.  And even if you've assumed some responsiblity for resolving the issue and making it available upstream (in a PR/MR sort of way) will the project include the required changes and release for your downstream consumption?  Continuing with the thought exercise, even if you've decided to assume all maintenance responsibility and have forked the repository for your consumption - are you in check with their updates?  Meaning if someone reported a vulnerability and it gets resolved upstream does your supply-chain have an ability to consume those changes into your fork?  Of course, that inherent benefit of consuming someone's upstream solution into yours could be very powerful in terms of you delivery value in a cost-effective way.  But are you prepared for the inevitability of failures somewhere in that supply-chain.  And does having a pathway to paying for maintenance actually provide the ability for maintainers to affect change on those upstream dependencies?
+
+## Developers have a Problem
+
+The idea of [Shifting Security Left](https://cloud.google.com/solutions/shifting-left-on-security) has been a brewing topic recently - the basic idea that developers _should_ take care and put in due diligence at the source code development task, versus waiting for tests and scanners to evaluate (likely in a CI/CD pipeline).  This is complicated by the costs of tools/scanners, and how they are executed.  But even so, the focus is a bit misplaced and creates the issue of where developers need to invest skills.  I think most would agree development and software engineering is a skill requiring depth, and the more breadth required the more diluted the focus - and to include the focus on solving business problems (over coding).  But even with tools to assist developers in the evaluation of supply-chain dependencies - the process is more about risk management, prevention and mitigation, and improved decision making.  I am talking about due diligence at the design, architecture and decisions about stack and technology inclusions.  The issues become multi-directional: one major challenge is that development/implementation generally happens once where developers make a decision about building versus consuming and then they move on; and another pitfall is that there is little formality or ceremony in validating the decision (most likely if anything were to happen it would be during code-review at a PR/MR step).  Some teams utilize architectural decision records, and some use SBOMs to capture the decision to include a dependency - still that's one-shot and is static from the point of decision on.
+
+### Due Diligence
+
+As a software developer, I am generally lazy but [not the only one](https://www.linkedin.com/pulse/programming-easy-developers-lazy-bit-elitist-russell-young/).  I want to spend the least amount of time possible on any one function - because I'm beholden to an estimation or some scope of delivery.  I just don't have time to put in the due diligence at depth for any dependencies.  I am positive it is the same for most developers, we simply want to deliver functionality. This is the shift-left dilemma. While I am generally in favor of developer responsibility extending from design to delivery, the scope issues associated with technical depth quickly become product/project debt.
+
+> A quick hypothetical - I know I need to include a logging library into my application.  So I do the obligatory search and find a handful of options.  If there is one associated by a supporting foundation I tend to have faith in its quality based on incubation requirements of that organization.  If not, I'll generally look for its source repo, and ask a couple basic questions: is there current/recent activity; are there more than one contributors; and, are there "stars", indicating at a minimum that others are watching this project.  I'll make a decision and add the dependency to my project's manifest and move on and integrate against it.
+
+While this is a good start, it lacks the depth of insight required to make solid qualified decisions.
+
+### The Contributor Myth
+
+If we are employing some level of evaluation of upstream source code bases, and their historical information we tend to make the assumption that contributions and their currency are key indicators of the repository's health - the myth is that the more contributions the better, and the more recent the contributions the better.  What we don't look at is the actual contributions and who they are coming from.
+
+To tie-back into the shifting-left of security I believe it is fair to say that any eyeball test of a repositories health is better than none, and it is important to note that the depth of evaluation should depend on the downstream consumer's tolerance for risk.  For many products/projects this quick evaluation is probably enough.  However, it is also important to note that this level of security extends beyond the known vulnerabilities chase - mainly for two reasons: first is that vulnerabilities are rarely reported against low-level libraries and packages, and second is that most dependency "watchers" are at best telling you to stay current (e.g., tools like GitHub's dependabot).
+
+Some quick introspection within a repositories `git` history reveals a bit more insight, possibly helping us answer the question above - what is the likelihood that the dependency will fix and release against an issue in a manner that reduces security risk?  First, we need to establish that not all contributions nor contributors are equal.  While all contributions are worthy and important to a repository they surely don't carry the same weight.
+
+I am going to caveat here, that any project with less than two or three developers contributing to the repository is an indicator of risk, and consumers are assuming ownership of their dependence.  And this holds even more truth if that project does not belong to a foundational organization.  The absolute here is that unless there is a contractual relationship that would enforce some notion of maintenance on the upstream dependency, there is no guarantee those contributors will continue to support it, never mind that lacking a service-level agreement not timeline could be upheld.
+
+### Functional Contributors
+
+By looking into the history of a repository we can quickly see that the distribution of contributions reveals a subset of contributions as being key, or at least a majority belonging to a small grouping of contributors.  For the sake of this essay, let us call these functional contributors. For example, it is likely that given a 100 contributors to a repository, 90+% of them are attributed to a one or two developers.
+
+And perhaps more important to the notion of risk management, we can also look at the timeline of the contributions and determine that they are more often than not on the front-end of the lifeline.
+
+### LowEndInsight
+Here's some Jupyter/Python insight based on the analysis done by [LowEndInsight](https://www.lowendinsight.dev) - [API available here, and to get the RAPID_KEY](https://rapidapi.com/quency-ai-quency-ai-default/api/lowendinsight2/) on the [Python Black repo](https://github.com/psf/black):
+
+```python
+RK = os.environ.get('RAPID_KEY')
+import requests
+import json
+import time
+repo = "https://github.com/novuhq/novu"
+payload = {"urls": [repo]}
+headers = {'X-RapidApi-Key': RK, 'X-RapidApi-Host': 'lowendinsight2.p.rapidapi.com', 'Content-Type': 'application/json'}
+r = requests.post('https://lowendinsight2.p.rapidapi.com/analyze/', data=json.dumps(payload), headers=headers)
+j = json.loads(r.content)
+print(j)
+while j['state'] == "incomplete":
+  r = requests.get("https://lowendinsight2.p.rapidapi.com/analyze/{}".format(j["uuid"]))
+  print(r)
+  j = json.loads(r.content)
+  time.sleep(2)
+  print("not complete yet, sleeping...")
+```
+The LowEndInsight JSON report:
+
+    {'uuid': '8fe42696-9680-11ed-9f4a-06aa01f57570', 'state': 'complete', 'report': {'repos': [{'header': {'uuid': 'b94e63f2-9676-11ed-aa4a-5641c3ad0f84', 'start_time': '2023-01-17T14:53:19.642069Z', 'source_client': 'lei_worker', 'repo': 'https://github.com/novuhq/novu', 'library_version': '0.8.1', 'end_time': '2023-01-17T14:53:37.750763Z', 'duration': 18}, 'data': {'risk': 'medium', 'results': {'top10_contributors': [{'name': 'Dima Grossman', 'merges': 1035, 'last_contribution_date': '2023-01-17T16:07:48+02:00', 'email': 'dima@grossman.io', 'contributions': 2233}, {'name': 'Gosha', 'merges': 126, 'last_contribution_date': '2023-01-10T22:38:23+02:00', 'email': 'djabarov.george@gmail.com', 'contributions': 1053}, {'name': 'ainouzgali', 'merges': 398, 'last_contribution_date': '2023-01-13T11:10:19+02:00', 'email': 'ainouzgali@gmail.com', 'contributions': 894}, {'name': 'David Söderberg', 'merges': 84, 'last_contribution_date': '2023-01-16T09:24:26+01:00', 'email': 'granskog_@hotmail.com', 'contributions': 688}, {'name': 'Pablo Fernández', 'merges': 206, 'last_contribution_date': '2023-01-12T14:57:58+00:00', 'email': 'pablo@novu.co', 'contributions': 246}, {'name': 'David Söderberg', 'merges': 188, 'last_contribution_date': '2023-01-16T09:24:26+01:00', 'email': '2233092+davidsoderberg@users.noreply.github.com', 'contributions': 202}, {'name': 'George Djabarov', 'merges': 185, 'last_contribution_date': '2023-01-03T16:43:33+02:00', 'email': '39195835+djabarovgeorge@users.noreply.github.com', 'contributions': 186}, {'name': 'Biswajeet Das', 'merges': 31, 'last_contribution_date': '2023-01-15T18:15:06+02:00', 'email': 'biswajeetdas18@gmail.com', 'contributions': 176}, {'name': 'Paweł', 'merges': 37, 'last_contribution_date': '2023-01-17T13:17:50+02:00', 'email': 'pawel.tymczuk@gmail.com', 'contributions': 129}, {'name': 'Abhilipsa Sahoo', 'merges': 38, 'last_contribution_date': '2022-11-05T23:21:53+05:30', 'email': 'abhilipsasahoo03@gmail.com', 'contributions': 106}], 'sbom_risk': 'medium', 'recent_commit_size_in_percent_of_codebase': 1e-05, 'large_recent_commit_risk': 'low', 'functional_contributors_risk': 'low', 'functional_contributors': 24, 'functional_contributor_names': ['Paweł <pawel.tymczuk@gmail.com>', 'Roni Äikäs <roni.aikas@nordcloud.com>', 'Pablo Fernández <pablo@novu.co>', 'Tim Lange <tim.lange@titanhq.de>', 'Paweł Tymczuk <LetItRock@users.noreply.github.com>', 'David Söderberg <granskog_@hotmail.com>', 'Pawan Jain <jainpawan211199@gmail.com>', 'alexvcs <alexcurtisslep@gmail.com>', 'Abhilipsa Sahoo <abhilipsasahoo03@gmail.com>', 'Thi Van Le <vannnyle@gmail.com>', 'George Djabarov <39195835+djabarovgeorge@users.noreply.github.com>', 'Roni Äikäs <roni.aikas@gmail.com>', 'p-fernandez <pablo.fernandez.otero@gmail.com>', 'Biswajeet Das <biswajeetdas18@gmail.com>', 'AKSHITA GUPTA <57909583+akshitagupta15june@users.noreply.github.com>', 'Gosha <djabarov.george@gmail.com>', 'Josh Soref <2119212+jsoref@users.noreply.github.com>', 'Krishna Agarwal <dmkrishna.agarwal@gmail.com>', 'ninjadev101 <sanchzxel@gmail.com>', 'Chavda Bhavik <bhavikvchavda@gmail.com>', 'Tomer Barnea <com.barnea@gmail.com>', 'David Söderberg <2233092+davidsoderberg@users.noreply.github.com>', 'ainouzgali <ainouzgali@gmail.com>', 'Dima Grossman <dima@grossman.io>'], 'contributor_risk': 'low', 'contributor_count': 293, 'commit_currency_weeks': 0, 'commit_currency_risk': 'low'}, 'repo_size': '0', 'repo': 'https://github.com/novuhq/novu', 'project_types': {'node': ['/tmp/lei-1673967199-85-111nksj/novu/apps/api/package.json', '/tmp/lei-1673967199-85-111nksj/novu/apps/web/package.json', '/tmp/lei-1673967199-85-111nksj/novu/apps/webhook/package.json', '/tmp/lei-1673967199-85-111nksj/novu/apps/widget/package.json', '/tmp/lei-1673967199-85-111nksj/novu/apps/ws/package.json', '/tmp/lei-1673967199-85-111nksj/novu/docs/package.json', '/tmp/lei-1673967199-85-111nksj/novu/examples/angular-notification-center-example/package.json', '/tmp/lei-1673967199-85-111nksj/novu/examples/vue-notification-center-example/package.json', '/tmp/lei-1673967199-85-111nksj/novu/libs/dal/package.json', '/tmp/lei-1673967199-85-111nksj/novu/libs/embed/package.json', '/tmp/lei-1673967199-85-111nksj/novu/libs/shared/package.json', '/tmp/lei-1673967199-85-111nksj/novu/libs/testing/package.json', '/tmp/lei-1673967199-85-111nksj/novu/package.json', '/tmp/lei-1673967199-85-111nksj/novu/packages/application-generic/package.json', '/tmp/lei-1673967199-85-111nksj/novu/packages/cli/package.json', '/tmp/lei-1673967199-85-111nksj/novu/packages/client/package.json', '/tmp/lei-1673967199-85-111nksj/novu/packages/headless/package.json', '/tmp/lei-1673967199-85-111nksj/novu/packages/nest/package.json', '/tmp/lei-1673967199-85-111nksj/novu/packages/node/package.json', '/tmp/lei-1673967199-85-111nksj/novu/packages/notification-center-angular/package.json', '/tmp/lei-1673967199-85-111nksj/novu/packages/notification-center-angular/projects/notification-center-angular/package.json', '/tmp/lei-1673967199-85-111nksj/novu/packages/notification-center-vue/package.json', '/tmp/lei-1673967199-85-111nksj/novu/packages/notification-center/package.json', '/tmp/lei-1673967199-85-111nksj/novu/packages/stateless/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/apns/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/burst-sms/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/clickatell/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/discord/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/emailjs/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/expo/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/fcm/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/firetext/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/gupshup/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/infobip/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/mailersend/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/mailgun/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/mailjet/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/mandrill/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/ms-teams/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/netcore/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/nexmo/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/nodemailer/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/outlook365/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/plivo/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/postmark/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/sendgrid/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/sendinblue/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/ses/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/slack/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/sms77/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/sns/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/sparkpost/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/telnyx/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/termii/package.json', '/tmp/lei-1673967199-85-111nksj/novu/providers/twilio/package.json']}, 'git': {'total_commits_on_default_branch': 7847, 'last_commit_date': '2023-01-17T16:07:48+02:00', 'hash': 'd6a638251126de32bb1aa83b3f4f28e95537bd13', 'default_branch': 'refs/remotes/origin/next'}, 'files': {'total_file_count': 3277, 'has_readme': True, 'has_license': True, 'has_contributing': True, 'binary_files_count': 88, 'binary_files': ['apps/api/e2e/mocha.e2e.opts', 'apps/api/src/app/auth/services/auth.interface.ts', 'apps/api/src/app/organization/dtos/get-invite.dto.ts', 'apps/web/cypress/fixtures/test-logo.png', 'apps/web/public/favicon-gradient.png', 'apps/web/public/favicon.ico', 'apps/web/public/static/images/avatar.png', 'apps/web/public/static/images/logo-black-white.png', 'apps/web/public/static/images/logo-formerly-dark-bg.png', 'apps/web/public/static/images/logo-formerly-light-bg.png', 'apps/web/public/static/images/logo-light.png', 'apps/web/public/static/images/logo-white-formerly-dark-bg.png', 'apps/web/public/static/images/logo.png', 'apps/web/public/static/images/notifications/notification_01.png', 'apps/web/public/static/images/notifications/notification_02.png', 'apps/web/public/static/images/notifications/notification_03.png', 'apps/web/public/static/images/providers/dark/apns.png', 'apps/web/public/static/images/providers/dark/clickatell.png', 'apps/web/public/static/images/providers/dark/gupshup.png', 'apps/web/public/static/images/providers/dark/infobip.png', 'apps/web/public/static/images/providers/dark/mailjet.png', 'apps/web/public/static/images/providers/dark/netcore.png', 'apps/web/public/static/images/providers/dark/nexmo.png', 'apps/web/public/static/images/providers/dark/outlook365.png', 'apps/web/public/static/images/providers/dark/plivo.png', 'apps/web/public/static/images/providers/dark/postmark.png', 'apps/web/public/static/images/providers/dark/sendgrid.png', 'apps/web/public/static/images/providers/dark/sendinblue.png', 'apps/web/public/static/images/providers/dark/telnyx.png', 'apps/web/public/static/images/providers/dark/termii.png', 'apps/web/public/static/images/providers/dark/twilio.png', 'apps/web/public/static/images/providers/light/apns.png', 'apps/web/public/static/images/providers/light/clickatell.png', 'apps/web/public/static/images/providers/light/gupshup.png', 'apps/web/public/static/images/providers/light/infobip.png', 'apps/web/public/static/images/providers/light/mailjet.png', 'apps/web/public/static/images/providers/light/netcore.png', 'apps/web/public/static/images/providers/light/nexmo.png', 'apps/web/public/static/images/providers/light/outlook365.png', 'apps/web/public/static/images/providers/light/plivo.png', 'apps/web/public/static/images/providers/light/postmark.png', 'apps/web/public/static/images/providers/light/sendgrid.png', 'apps/web/public/static/images/providers/light/sendinblue.png', 'apps/web/public/static/images/providers/light/telnyx.png', 'apps/web/public/static/images/providers/light/termii.png', 'apps/web/public/static/images/providers/light/twilio.png', 'apps/web/public/static/images/signin_bg.png', 'apps/webhook/e2e/mocha.e2e.opts', 'apps/widget/public/favicon.ico', 'apps/widget/public/logo192.png', 'apps/widget/public/logo512.png', 'apps/widget/public/no-new-notifications.png', 'docs/static/.nojekyll', 'docs/static/fonts/brother-1816-book.woff2', 'docs/static/fonts/brother-1816-medium.woff2', 'docs/static/fonts/brother-1816-regular.woff2', 'docs/static/fonts/ibm-plex-mono-regular.woff2', 'docs/static/img/activity.png', 'docs/static/img/diagram.jpeg', 'docs/static/img/digest-flow.png', 'docs/static/img/favicon.ico', 'docs/static/img/monorepo-structure.jpeg', 'docs/static/img/notification-center.png', 'docs/static/img/notification-list-cog.png', 'docs/static/img/platform/filter/dark-add-filter-section.png', 'docs/static/img/platform/filter/dark-filter-section.png', 'docs/static/img/platform/filter/dark-webhook-rule-example.png', 'docs/static/img/platform/filter/light-add-filter-section.png', 'docs/static/img/platform/filter/light-filter-section.png', 'docs/static/img/platform/filter/light-webhook-rule-example.png', 'docs/static/img/quickstart/connect-image.png', 'docs/static/img/scheduled-delay.png', 'docs/static/img/social-preview.jpg', 'docs/static/img/tutorial/docsVersionDropdown.png', 'docs/static/img/tutorial/localeDropdown.png', 'docs/static/img/user-preference.png', 'docs/static/img/webhook-url.png', 'examples/angular-notification-center-example/src/app/app.component.sass', 'examples/angular-notification-center-example/src/assets/.gitkeep', 'examples/angular-notification-center-example/src/favicon.ico', 'examples/vue-notification-center-example/public/favicon.ico', 'libs/dal/src/repositories/subscription-preference/index.ts', 'libs/embed/test/embed.test.ts', 'packages/nest/src/providers/novu.connection.provider.ts', 'packages/node/src/types/example.d.ts', 'packages/notification-center/src/images/no-new-notifications.png', 'packages/notification-center/src/images/no-settings.png', 'packages/stateless/src/types/example.d.ts']}, 'config': {'sbom_risk_level': 'medium', 'medium_large_commit_level': 0.2, 'medium_functional_contributors_level': 5, 'medium_currency_level': 26, 'medium_contributor_level': 5, 'high_large_commit_level': 0.3, 'high_functional_contributors_level': 3, 'high_currency_level': 52, 'high_contributor_level': 3, 'critical_large_commit_level': 0.4, 'critical_functional_contributors_level': 2, 'critical_currency_level': 104, 'critical_contributor_level': 2, 'base_temp_dir': '/tmp'}}}]}, 'metadata': {'times': {'start_time': '2023-01-17T16:04:03.242363Z', 'end_time': '2023-01-17T16:04:03.294965Z', 'duration': 0}}}
+
+Some Jupyter Notebook analysis:
+
+```python
+results = j["report"]["repos"][0]["data"]["results"]
+total_commits = j["report"]["repos"][0]["data"]["git"]["total_commits_on_default_branch"]
+top10 = results["top10_contributors"]
+
+for c in top10:
+    c.update({'contribution_percentage': round((c["contributions"]/total_commits)*100,2)})
+
+import pandas as pd
+import numpy as np
+import scipy as sp
+import plotly
+plotly.offline.init_notebook_mode(connected=True)
+import plotly.figure_factory as ff
+
+df = pd.DataFrame.from_dict(top10)
+df = df.drop('email', axis=1)
+table = ff.create_table(df)
+
+table.update_layout(width=1024)
+table.show()
+```
+![table](../assets/images/lei-novu-table.png)
+
+```python
+import plotly.express as px
+fig = px.bar(x=df['name'].to_list(), y=df['contributions'].to_numpy(), title=repo, labels=dict(x="Contributor", y="Contributions"))
+fig.update_layout(width=1024)
+fig.show()
+```
+![plotly.express](../assets/images/lei-novu-plot.png)
+
+At first glance this doesn't look like a terrible distribution.  There are contributions from David Soderberg with different email address, but it doesn't affect the perspective much. From a contributor view it looks "low" risk.  
+
+### Red Flag?
+
+In contrast let's take a look at [ExpressJS/express](https://github.com/expressjs/express) a popular javascript web-app framework:
+
+![lei-express-table](../assets/images/lei-express-table.png)
+
+It becomes clear that this distribution looks considerably different - with the majority of contributions coming early in the project's history.  And the majority of contributions came from someone who hasn't contributed in over 10 years.  This presents a significantly different risk profile.
+
+![lei-express-plot](../assets/images/lei-express-plot.png)
+
+While this insight doesn't point at security vulnerabilities it does paint a picture that _could_ cause concern over the ability to get updates made and new releases propogated to the appropriate package management ecosystem.
+
+This isn't earth shattering knowledge, however it simply shows that contributions in terms of quantity can be mapped to a timeline and distribution making it easier to gain useful insight into a source repository.  This metadata can be used to inform a decision maker - quantifying the "eyeball" test.  In the context of due diligence if you add this insight to the fact that `express` has almost 60K stars on GitHub one can begin to understand any assumed risk and their ownership in the consumption of the dependency.
+
+[Software rot](https://heimdalsecurity.com/blog/software-rot/), or software entropy, is the basic idea that source does in fact deteriorate over time, and requires consistent, continuous, maintenance (to include sustainment of dependency updates).  Next level insight into `express` should probably start with an evaluation of its currency with dependencies.  There are 3rd party services that are providing repositories with update information - including the automatic generation of pull-requests/merge-requests.  GitHub's [dependabot](https://docs.github.com/en/code-security/dependabot/working-with-dependabot) service does this in fact.  While LowEndInsight currently doesn't look for dependabot configuration, it could be made to do so in the future - providing another bit of intelligence to the decision-making process.
+
+## Summary
+
+Shifting left of security, in order to close the accountability gap, and look towards prevention in addition to vulnerability scanning - requires new levels of due diligence in the developer decision making process.  There tools available to assist in that due diligence, simplifying the data discovery and analysis required to gain quick insights. 
+
+If we go back to the "I am not a supplier" notion - we quickly hit the myth, that contributions by themselves in abstract form are an indicator of anything useful to the decision making process.  The problem grows, even beyond the premise of this essay that due diligence is needed to ensure quality decisions about the inclusion of dependencies.  There still is no guarantee that a functional contributor will support maintenance needed - for bugs, features or security issues.  But we do need to put this accountability into the hands of developers.
