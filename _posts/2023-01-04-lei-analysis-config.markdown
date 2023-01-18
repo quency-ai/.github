@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "LowEndInsight Configuration Details"
-date:   2022-12-23 10:46:41 -0500
+date:   2023-01-04 10:46:41 -0500
 categories: lei
 ---
 

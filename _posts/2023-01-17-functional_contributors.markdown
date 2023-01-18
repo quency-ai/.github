@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Functional Contributors"
-date:   2022-01-17 10:46:41 -0500
+date:   2023-01-17 10:46:41 -0500
 categories: lei
 ---
 
@@ -13,16 +13,6 @@ This is a winded essay that looks into the problems associated with current deve
 
 Shifting left of security, in order to close the accountability gap, and look towards prevention in addition to vulnerability scanning - requires new levels of due diligence in the developer decision making process.  There tools available to assist in that due diligence, simplifying the data discovery and analysis required to gain quick insights. 
  
-## The World has a Problem
-
-We are chasing the proverbial tail.  Our global cybersecurity posture is based on two huge fallacies - 1) defense is based on economically manipulated black-market attack vectors, propogated within and without nation-state actors, who are equally manipulated; and 2) the entire premise operates on "known" vulnerabilities - prevention and defense are hyper focused on the ability to scan for "known" holes and offense is the new luke-cold warfare.
-
-[This is How they Tell Me the World Ends](https://thisishowtheytellmetheworldends.com/) is an incredible look into the brief history of how we got here - showing how it is near impossible to trace trace to knowledge, who is who in the zoo.
-
-[Rohit Sethi at Security Compass and his essay on the need to focus on leading indicators](https://www.securitycompass.com/in-the-news/guest-essay-the-case-for-network-defenders-to-focus-on-leading-not-lagging-indicators/) highlight the reality that we're not really protecting the fort, nor preventing the holes, but are only looking for vulnerabilities as they become known by continually scanning against what has already been built.
-
-[Mark Curphey sees a crash coming](https://blog.crashoverride.com/a-security-tools-crash-is-coming) in the secuity tools space. While consolidation is a natural contraction in technology's rapid evolutionary environments Mark points out that "budget freezes" induced by global economic changes will affect how organizations spend.  And as the reality of this awkward security posture becomes clearer - many of those companies will be exposed, as simply not effective.  More to the point, [Mark also highlights the obvious](https://blog.crashoverride.com/why-supply-chain-security-is-so-much-more-than-open-source-code-and-cves) that even with SBOM/BOM technology in place and clean bills of health, organizational dependency on "services" (e.g., IaaS, PaaS, and SaaS level software) plus the lagging indicator problem of "known" vulnerabilities creates a massive false sense of security.
-
 ## Software Engineering has a Problem
 All software builds on software.  Sounds obscure and abstract...well, because it is.  I'll go ahead and take the position that Open Source software (OSS) is generally and ubiquitously foundational - at the OS, application, language, library, framework levels.
 
@@ -146,3 +136,5 @@ This isn't earth shattering knowledge, however it simply shows that contribution
 Shifting left of security, in order to close the accountability gap, and look towards prevention in addition to vulnerability scanning - requires new levels of due diligence in the developer decision making process.  There tools available to assist in that due diligence, simplifying the data discovery and analysis required to gain quick insights. 
 
 If we go back to the "I am not a supplier" notion - we quickly hit the myth, that contributions by themselves in abstract form are an indicator of anything useful to the decision making process.  The problem grows, even beyond the premise of this essay that due diligence is needed to ensure quality decisions about the inclusion of dependencies.  There still is no guarantee that a functional contributor will support maintenance needed - for bugs, features or security issues.  But we do need to put this accountability into the hands of developers.
+
+So, rather than only relying on scanners to catch the bad juju after you've already added the dependency - add looking for insight within the source repository itself for risks that might lead to complexity if and when you need maintenance support the most.
