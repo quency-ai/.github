@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Functional Contributors"
-date:   2023-01-17 10:46:41 -0500
+date:   2023-01-22 10:46:41 -0500
 categories: lei
 ---
 
@@ -11,7 +11,7 @@ categories: lei
 
 This is a winded essay that looks into the problems associated with current developer-security priorities.
 
-Shifting left of security, in order to close the accountability gap, and look towards prevention in addition to vulnerability scanning - requires new levels of due diligence in the developer decision making process.  There tools available to assist in that due diligence, simplifying the data discovery and analysis required to gain quick insights. 
+Shifting left of security, in order to close the accountability gap, and look towards prevention in addition to vulnerability scanning - requires new levels of due diligence in the developer decision making process.  There tools available to assist in that due diligence, simplifying the data discovery and analysis required to gain quick insights about the quality and security of open source software (OSS) repositories
  
 ## Software Engineering has a Problem
 All software builds on software.  Sounds obscure and abstract...well, because it is.  I'll go ahead and take the position that Open Source software (OSS) is generally and ubiquitously foundational - at the OS, application, language, library, framework levels.
@@ -25,6 +25,8 @@ Our software-supply chain structure is strained, and new demands for formality i
 `what is the probability the project will resolve and release a fix when needed in a timely fashion?`
 
 that you as a consuming can rely on in your own software supply-chain stream.  And even if you've assumed some responsiblity for resolving the issue and making it available upstream (in a PR/MR sort of way) will the project include the required changes and release for your downstream consumption?  Continuing with the thought exercise, even if you've decided to assume all maintenance responsibility and have forked the repository for your consumption - are you in check with their updates?  Meaning if someone reported a vulnerability and it gets resolved upstream does your supply-chain have an ability to consume those changes into your fork?  Of course, that inherent benefit of consuming someone's upstream solution into yours could be very powerful in terms of you delivery value in a cost-effective way.  But are you prepared for the inevitability of failures somewhere in that supply-chain.  And does having a pathway to paying for maintenance actually provide the ability for maintainers to affect change on those upstream dependencies?
+
+It is easy to take for granted the open source ecosystem.  But perhaps worse is the bad assumption that all projects are treated with respect regarding quality and security.
 
 ## Developers have a Problem
 
@@ -50,7 +52,7 @@ I am going to caveat here, that any project with less than two or three develope
 
 ### Functional Contributors
 
-By looking into the history of a repository we can quickly see that the distribution of contributions reveals a subset of contributions as being key, or at least a majority belonging to a small grouping of contributors.  For the sake of this essay, let us call these functional contributors. For example, it is likely that given a 100 contributors to a repository, 90+% of them are attributed to a one or two developers.
+By looking into the history of a repository we can quickly see that the distribution of contributions reveals a subset of contributions as being key, or at least a majority belonging to a small grouping of contributors.  For the sake of this essay, let us call these functional contributors - those that are responsible for the "majority" of contributions for a given repository. For example, it is likely that given a 100 contributors to a repository, 90+% of them are attributed to a one or two developers.
 
 And perhaps more important to the notion of risk management, we can also look at the timeline of the contributions and determine that they are more often than not on the front-end of the lifeline.
 
